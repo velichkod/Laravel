@@ -1,0 +1,21 @@
+{
+    "name": "optimait/laravel",
+    "description": "Laravel Specific services and classes to help ease the development",
+    "license": "GPL",
+    "keywords": [ "laravel", "repository", "export", "download", "services" ],
+    "authors": [
+        {
+            "name": "themightysapien",
+            "email": "themightysapien@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": { "Optimait\\Laravel": "src" }
+    },
+    "require": {
+        "php": ">=5.5.9",
+        "laravel/framework": "5.1.*"
+    }
+    
+}
