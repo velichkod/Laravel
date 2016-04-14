@@ -73,4 +73,8 @@ abstract class AbstractValidator {
         $this->defaultRule = $newDefault;
         return $this;
     }
+
+    public function forContext($newDetault){
+        return $this->setDefault($newDetault);
+    }
 } 
