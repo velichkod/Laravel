@@ -14,9 +14,7 @@ use net\authorize\api\controller as AnetController;
 
 
 define("AUTHORIZENET_LOG_FILE", "phplog");
-define("MERCHANT_LOGIN_ID", "9Mwy8P2svN4");
-define("MERCHANT_TRANSACTION_KEY", "825na5HB7U26Bu3K");
-define("SUBSCRIPTION_INTERVAL_DAYS", "7");
+
 date_default_timezone_set('America/Los_Angeles');
 class AuthorizeDotNet
 {
