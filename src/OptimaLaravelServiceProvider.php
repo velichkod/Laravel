@@ -22,6 +22,13 @@ class OptimaLaravelServiceProvider extends ServiceProvider
         require_once 'Helpers/dateHelpers.php';
         require_once 'Helpers/helpers.php';
         require_once 'Helpers/render.php';
+
+        $this->handleConfigs();
+        $this->handleMigrations();
+        $this->handleViews();
+        $this->handleTranslations();
+        $this->handleRoutes();
+        $this->handleAssets();
     }
 
     /**
@@ -32,5 +39,33 @@ class OptimaLaravelServiceProvider extends ServiceProvider
     public function register()
     {
         //
+    }
+
+    private function handleConfigs() {
+
+    }
+
+    private function handleTranslations() {
+
+    }
+
+    private function handleViews() {
+
+    }
+
+    private function handleMigrations() {
+
+        $this->publishes([
+            __DIR__.'/../migrations/' => database_path('migrations')
+        ], 'migrations');
+    }
+
+    private function handleRoutes() {
+
+        include __DIR__.'/../routes.php';
+    }
+
+    public function handleAssets(){
+
     }
 }

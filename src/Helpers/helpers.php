@@ -3,7 +3,7 @@
  * @param $string
  * @return string
  */
-function encrypt($string){
+function encryptIt($string){
     return urlencode(Crypt::encrypt($string));
 }
 
@@ -11,7 +11,7 @@ function encrypt($string){
  * @param $encrypted
  * @return string
  */
-function decrypt($encrypted){
+function decryptIt($encrypted){
     return Crypt::decrypt(urldecode($encrypted));
 }
 
@@ -28,8 +28,8 @@ function sysRoute($route, $params=array()){
  * @param $url
  * @return string
  */
-function sysUrl($url){
-    return url('webpanel/'.$url);
+function sysUrl($url, $params = array()){
+    return url('webpanel/'.$url, $params);
 }
 
 /**
