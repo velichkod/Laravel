@@ -20,5 +20,5 @@
     "psr-4": {
       "Optimait\\Laravel\\": "src/"
     }
-  },
+  }
 }
