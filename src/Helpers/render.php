@@ -4,6 +4,11 @@ function btn($title = 'Save', $class = 'btn-primary')
     return '<input type="submit" value="' . $title . '" class="btn ' . $class . ' submit-btn">';
 }
 
+
+function method_feild($method='put'){
+    return '<input type="hidden" name="_method" value="'.$method.'">';
+}
+
 function OptionsView($collection, $idKey, $valKey, $default = '', $skip = array())
 {
     $str = '';
