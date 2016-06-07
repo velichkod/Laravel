@@ -9,8 +9,12 @@
 namespace Optimait\Laravel\Models;
 
 
+use Optimait\Laravel\Traits\CreatedUpdatedTrait;
+use Optimait\Laravel\Traits\CreaterUpdaterTrait;
+
 class Attachment extends \Eloquent
 {
+    use CreatedUpdatedTrait, CreaterUpdaterTrait;
     protected $table = 'attachments';
     protected $fillable = array('media_id', 'created_by', 'attachable_id', 'attachable_type', 'type', 'title');
     protected $with = array('media');
