@@ -40,7 +40,7 @@ class Attachment extends \Eloquent
      */
     public function media()
     {
-        return $this->hasOne('App\Modules\Attachments\Media', 'id', 'media_id');
+        return $this->hasOne('Optimait\Laravel\Models\Media', 'id', 'media_id');
     }
 
 

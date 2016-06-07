@@ -77,4 +77,8 @@ abstract class AbstractValidator {
     public function forContext($newDetault){
         return $this->setDefault($newDetault);
     }
+
+    public function when($newDefault){
+        return $this->setDefault($newDefault);
+    }
 } 
