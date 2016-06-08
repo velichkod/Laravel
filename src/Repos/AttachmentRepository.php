@@ -9,7 +9,9 @@
 namespace Optimait\Laravel\Repos;
 
 
+use Optimait\Laravel\Models\Attachment;
 use Optimait\Laravel\Validators\AttachmentValidator;
+use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 
 class AttachmentRepository extends EloquentRepository
 {
