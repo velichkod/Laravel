@@ -61,7 +61,7 @@ class Attachment extends \Eloquent
 
     public function getDownloadUrl()
     {
-        return url('webpanel/attachments/download/' . encrypt($this->id));
+        return url('attachments/download/' . encrypt($this->id));
     }
 
     public function getFileUrl()

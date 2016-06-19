@@ -45,7 +45,7 @@ class AttachmentRepository extends EloquentRepository
         print_r($finalData);*/
 
         $attachmentModel = parent::getNew($attachmentData);
-        $attachmentModel->slug = \Str::slug($attachmentData['name'], '-');
+        $attachmentModel->slug = str_slug($attachmentData['name'], '-');
         if ($attachmentModel->save()) {
             $this->insertedId = $attachmentModel->id;
             return true;
@@ -67,7 +67,7 @@ class AttachmentRepository extends EloquentRepository
 
 
         $attachmentModel->fill($attachmentData);
-        $attachmentModel->slug = \Str::slug($attachmentData['name'], '-');
+        $attachmentModel->slug = str_slug($attachmentData['name'], '-');
         if ($attachmentModel->save()) {
             return true;
         }
