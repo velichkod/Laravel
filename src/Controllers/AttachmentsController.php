@@ -11,6 +11,7 @@ namespace Optimait\Laravel\Controllers;
 
 use Illuminate\Routing\Controller;
 use Input;
+use Optimait\Laravel\Exceptions\EntityNotFoundException;
 use Optimait\Laravel\Repos\AttachmentRepository;
 
 class AttachmentsController extends Controller {
@@ -104,11 +105,11 @@ class AttachmentsController extends Controller {
     public function getDownload($id){
         $attachment = $this->attachments->getById(decrypt($id));
         if(!$attachment){
-            throw new ResourceNotFoundException("Attachment Not Found");
+            throw new EntityNotFoundException("Attachment Not Found");
         }
 
 
-        return \Response::download($attachment->media->folder.$attachment->media->filename);
+        return \Response::download($attachment->media->folder.$attachment->media->filename, $attachment->media->original_name);
 
     }
 
