@@ -1,5 +1,5 @@
 <?php
-namespace Optimait\Laravel\Services;
+namespace Optimait\Laravel\Services\Export;
 
 use Response;
 

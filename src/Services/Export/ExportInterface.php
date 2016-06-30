@@ -6,7 +6,7 @@
  * Time: 11:28 AM
  */
 
-namespace Optimait\Laravel\Services;
+namespace Optimait\Laravel\Services\Export;
 
 
 interface ExportInterface {

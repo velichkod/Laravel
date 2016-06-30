@@ -1,6 +1,6 @@
 <?php
 
-namespace Optimait\Laravel\Services;
+namespace Optimait\Laravel\Services\Export;
 
 
 abstract class AbstractExporter {
