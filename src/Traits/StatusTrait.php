@@ -24,4 +24,9 @@ trait StatusTrait
         return $this->status == 1;
     }
 
+    public static $statusLabel = [
+        0 => '<label class="btn btn-danger btn-sm">Inactive</label>',
+        1 => '<label class="btn btn-success btn-sm">Active</label>',
+    ];
+
 }
