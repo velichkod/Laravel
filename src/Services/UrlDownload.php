@@ -9,6 +9,8 @@
 namespace Optimait\Laravel\Services;
 
 
+use Curl\Curl;
+
 class UrlDownload
 {
     private $isSecure = false;
@@ -17,6 +19,7 @@ class UrlDownload
     private $url;
     private $username;
     private $password;
+    private $curl;
 
     /**
      * @return mixed
@@ -135,28 +138,50 @@ class UrlDownload
     {
         $this->url = $url;
         $this->filename = $filename;
+        $this->curl = new Curl();
     }
 
     public function download()
     {
-        $curl_handle = curl_init();
+        /*$curl_handle = curl_init();
         curl_setopt($curl_handle, CURLOPT_HEADER, 0);
         curl_setopt($curl_handle, CURLOPT_URL, $this->getUrl());
         curl_setopt($curl_handle, CURLOPT_CONNECTTIMEOUT, 2);
-        curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, true);*/
+        /*$curl->setReferrer('');
+        $curl->setUserAgent('');*/
 
         if ($this->isSecure()):
-            curl_setopt($curl_handle, CURLOPT_USERPWD, $this->getUsername() . ":" . $this->getPassword());
+            $this->curl->setBasicAuthentication($this->getUsername(), $this->getPassword());
+            /*curl_setopt($curl_handle, CURLOPT_USERPWD, $this->getUsername() . ":" . $this->getPassword());*/
         endif;
 
-        curl_setopt($curl_handle, CURLOPT_SSL_VERIFYPEER, false);
-        $buffer = curl_exec($curl_handle);
+        $this->curl->setOpt(CURLOPT_RETURNTRANSFER, TRUE);
+        $this->curl->setOpt(CURLOPT_SSL_VERIFYPEER, FALSE);
+
+
+        /*$buffer = curl_exec($curl_handle);
+        if(!$buffer || $buffer == 'false'){
+            throw new \Exception("Invalid Response : ".$buffer);
+        }
         //$httpcode = curl_getinfo($curl_handle, CURLINFO_HTTP_CODE);
         //echo $httpcode;
-        curl_close($curl_handle);
+        curl_close($curl_handle);*/
+
+        $this->curl->get($this->getUrl());
+        if ($this->curl->error) {
+            throw new \Exception($this->curl->error_code);
+        }
+        else {
+
+            /*var_dump($this->curl->request_headers);
+            var_dump($this->curl->response_headers);*/
 
 
-        file_put_contents($this->getFullPath(), $buffer);
+            file_put_contents($this->getFullPath(), $this->curl->response);
+        }
+
+
     }
 
 
