@@ -158,6 +158,7 @@ class UrlDownload
 
         $this->curl->setOpt(CURLOPT_RETURNTRANSFER, TRUE);
         $this->curl->setOpt(CURLOPT_SSL_VERIFYPEER, FALSE);
+        $this->curl->setOpt(CURLOPT_FOLLOWLOCATION, true);
 
 
         /*$buffer = curl_exec($curl_handle);
@@ -173,12 +174,18 @@ class UrlDownload
             throw new \Exception($this->curl->error_code);
         }
         else {
+            if($this->curl->http_status_code != 200){
+                throw new \Exception("Invalid Response : Code : ".$this->curl->http_status_code);
+            }
 
             /*var_dump($this->curl->request_headers);
             var_dump($this->curl->response_headers);*/
 
+            /*$header_len = curl_getinfo($this->curl->curl, CURLINFO_HEADER_SIZE);*/
+            /*$header = substr($this->curl->curl, 0, $header_len);*/
+            /*$body = substr($this->curl->response, $header_len);*/
 
-            file_put_contents($this->getFullPath(), $this->curl->response);
+            file_put_contents($this->getFullPath(), strstr($this->curl->response, 'Online product code'));
         }
 
 
