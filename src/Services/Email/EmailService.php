@@ -52,14 +52,12 @@ class EmailService
      */
     public function attach($attachments)
     {
-        if(is_array($attachments)){
-            $this->attachments= array_merge($this->attachments, $attachments);
-        }
-        else{
+        if (is_array($attachments)) {
+            $this->attachments = array_merge($this->attachments, $attachments);
+        } else {
             $this->attachments[] = $attachments;
         }
 
-        return $this;
     }
 
     /**
@@ -166,8 +164,8 @@ class EmailService
         });
     }
 
-
-    public function refresh(){
+    public function refresh()
+    {
         $this->attachments = [];
         $this->subject = '';
         $this->cc = [];
@@ -177,4 +175,4 @@ class EmailService
 
         return $this;
     }
-} 
+}
