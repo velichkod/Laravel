@@ -151,7 +151,7 @@ class TextToImage
     public function setDynamicSize()
     {
         $this->setWidth(10 * strlen($this->getText()) + 100);
-        $this->setHeight(self::FONT_SIZE + 100);
+        $this->setHeight(self::FONT_SIZE + 10);
         return $this;
     }
 
@@ -167,7 +167,7 @@ class TextToImage
             $font->color('#000000');
             $font->align('center');
             $font->valign('center');
-            $font->angle(10);
+            $font->angle(0);
         });
 
         return $this;
