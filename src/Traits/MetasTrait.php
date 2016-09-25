@@ -19,6 +19,7 @@ trait MetasTrait
         if (is_null($this->metasContainer)) {
             if ($this->metas):
                 foreach ($this->metas as $meta) {
+
                     $unserialized = unserialize($meta->meta_value);
                     if ($unserialized !== false) {
                         $this->metasContainer[$meta->meta_key] = $unserialized;
@@ -26,6 +27,7 @@ trait MetasTrait
                         $this->metasContainer[$meta->meta_key] = $meta->meta_value;
                     }
 
+                    $this->metasContainer[$meta->meta_key] = $meta->meta_value;
                 }
             endif;
         }
@@ -54,6 +56,7 @@ trait MetasTrait
             $this->metas()->saveMany($insAr);
         }
     }
+
 
     public function deleteMetaByKey($k)
     {
