@@ -19,7 +19,7 @@ function yearNo($date)
     return $dateObj->format("Y");
 }
 
-function formatDateDiff($interval) {
+function formatDateDiff($interval, $separator = ', ') {
 
     $doPlural = function($nb,$str){return $nb>1?$str.'s':$str;}; // adds plurals
 
@@ -49,7 +49,7 @@ function formatDateDiff($interval) {
 
     // We use the two biggest parts
     if(count($format) > 1) {
-        $format = array_shift($format)." and ".array_shift($format);
+        $format = array_shift($format)." ".$separator." ".array_shift($format);
     } else {
         $format = array_pop($format);
     }
