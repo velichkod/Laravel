@@ -11,7 +11,12 @@
   "require": {
     "php": ">=5.4.0",
     "laravel/framework": "5.*",
+<<<<<<< HEAD
     "intervention/image": "2.*"
+=======
+    "intervention/image": "2.*",
+    "curl/curl": "^1.4"
+>>>>>>> 92e002be5d0082fb857814c5dedcb9621394b1cf
   },
   "require-dev": {
     "phpunit/phpunit": "~4.0"
