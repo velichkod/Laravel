@@ -50,14 +50,10 @@ class EmailService
     /**
      * @param mixed $attachments
      */
-    public function attach($attachments)
+    public function setAttachments($attachments)
     {
-        if (is_array($attachments)) {
-            $this->attachments = array_merge($this->attachments, $attachments);
-        } else {
-            $this->attachments[] = $attachments;
-        }
-
+        $this->attachments[] = $attachments;
+        return $this;
     }
 
     /**
@@ -163,16 +159,4 @@ class EmailService
             }
         });
     }
-
-    public function refresh()
-    {
-        $this->attachments = [];
-        $this->subject = '';
-        $this->cc = [];
-        $this->bcc = [];
-        $this->to = '';
-        $this->from = null;
-
-        return $this;
-    }
-}
+} 
