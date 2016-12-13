@@ -7,9 +7,9 @@ use \Image;
 class ImageManipulator {
 
 
-    public function resize($filename, $uploadFolder, $sizes = array(
-                                                    array(100,100, 'height'), array(250,150, 'height')/*, array(270, 150), array(600,350,'height')*/
-                                                    )){
+    public function resize($filename, $uploadFolder){
+
+        $sizes = array_values(config('resize.sizes'));
 
         foreach($sizes as $size){
             $img = Image::make($uploadFolder.$filename);

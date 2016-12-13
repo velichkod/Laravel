@@ -8,11 +8,6 @@ class Media extends \Eloquent
     protected $table = 'media';
     protected $fillable = array('filename', 'original_name', 'mime_type', 'filesize', 'folder');
 
-
-    public static $sizes = array(
-        array(100, 100, 'height'), array(250, 150, 'height')/*, array(270, 150), array(600,350,'height')*/
-    );
-
     public $timestamps = false;
 
 
@@ -35,12 +30,13 @@ class Media extends \Eloquent
      */
     public function creator()
     {
-        return $this->belongsTo('User', 'created_by');
+        return $this->belongsTo('App\User', 'created_by');
     }
 
     public function selfDestruct()
     {
-        foreach(self::$sizes as $size){
+        $sizes = array_values(config('resize.sizes'));
+        foreach($sizes as $size){
             @unlink($this->folder .$size[0].'X'.$size[1]. $this->filename);
         }
 

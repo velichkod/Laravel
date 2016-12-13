@@ -19,10 +19,6 @@ class Attachment extends \Eloquent
     protected $fillable = array('media_id', 'created_by', 'attachable_id', 'attachable_type', 'type', 'title');
     protected $with = array('media');
 
-    protected $sizes = array(
-        array(100, 100, 'height'), array(250, 150, 'height')/*, array(270, 150), array(600,350,'height')*/
-    );
-
     /*public $timestamps = false;*/
 
 
@@ -69,9 +65,10 @@ class Attachment extends \Eloquent
         return asset($this->media->folder . $this->media->filename);
     }
 
-    public function getThumbUrl()
+    public function getThumbUrl($thumb = 'thumb')
     {
-        return asset($this->media->folder . '100X100' . $this->media->filename);
+        $size = config('resize.sizes.' . $thumb);
+        return asset($this->media->folder . $size[0] . 'X' . $size[1] . $this->media->filename);
     }
 
     public function isImage()
