@@ -45,6 +45,9 @@ trait MetasTrait
         if (!empty($metaAr)) {
             $insAr = [];
             foreach ($metaAr as $k => $v) {
+                /*if ($v == '') {
+                    continue;
+                }*/
                 if ($delete) {
                     $this->deleteMetaByKey($k);
                 }
@@ -60,7 +63,7 @@ trait MetasTrait
 
     public function deleteMetaByKey($k)
     {
-        $this->metas()->where('meta_name', 'LIKE', $k)->delete();
+        $this->metas()->where('meta_key', 'LIKE', $k)->delete();
     }
 
     public function renewMetas($metaAr)

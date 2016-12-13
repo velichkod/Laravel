@@ -167,6 +167,7 @@ trait UploaderTrait
 
 
     public function deleteOldMedia($mediaID, $physicalDelete = false){
+
         /*lets delete old one*/
         $oldAttachmentModel = Fetcher::FindAttachment($mediaID);
         if (!is_null($oldAttachmentModel)) {
