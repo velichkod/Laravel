@@ -20,6 +20,7 @@ class EmailService
     private $cc;
     private $bcc;
     private $subject;
+    private $sendAs;
 
     /**
      * @return mixed
@@ -71,6 +72,10 @@ class EmailService
     {
         $this->bcc = $bcc;
         return $this;
+    }
+
+    public function sendAs($name){
+        $this->sendAs = $name;
     }
 
     /**
@@ -136,7 +141,7 @@ class EmailService
                 $message->from($emailService->getFrom());
             }
 
-            $message->to($emailService->getTo());
+            $message->to($emailService->getTo(), $this->sendAs ? $this->sendAs : '');
             $message->subject($emailService->getSubject());
 
             $bcc = $emailService->getBcc();
