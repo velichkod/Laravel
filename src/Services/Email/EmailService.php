@@ -147,10 +147,10 @@ class EmailService
         $emailService = $this;
         Mail::send($view, $data, function ($message) use ($emailService) {
             if (!is_null($emailService->getFrom())) {
-                $message->from($emailService->getFrom(), $this->fromAs ? $this->fromAs : '');
+                $message->from($emailService->getFrom(), $this->fromAs ? $this->fromAs : null);
             }
 
-            $message->to($emailService->getTo(), $this->sendAs ? $this->sendAs : '');
+            $message->to($emailService->getTo(), $this->sendAs ? $this->sendAs : null);
             $message->subject($emailService->getSubject());
 
             $bcc = $emailService->getBcc();
