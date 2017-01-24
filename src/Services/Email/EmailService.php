@@ -162,7 +162,7 @@ class EmailService
             $cc = $emailService->getCc();
             if (!empty($cc)) {
                 foreach ($cc as $b) {
-                    $message->bcc($b);
+                    $message->cc($b);
                 }
             }
             $attachments = $emailService->getAttachments();
