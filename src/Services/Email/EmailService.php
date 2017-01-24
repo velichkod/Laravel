@@ -21,6 +21,7 @@ class EmailService
     private $bcc;
     private $subject;
     private $sendAs;
+    private $fromAs;
 
     /**
      * @return mixed
@@ -74,8 +75,14 @@ class EmailService
         return $this;
     }
 
-    public function sendAs($name){
+    public function sendAs($name)
+    {
         $this->sendAs = $name;
+    }
+
+    public function fromAs($name)
+    {
+        $this->fromAs = $name;
     }
 
     /**
@@ -138,7 +145,7 @@ class EmailService
         $emailService = $this;
         Mail::send($view, $data, function ($message) use ($emailService) {
             if (!is_null($emailService->getFrom())) {
-                $message->from($emailService->getFrom());
+                $message->from($emailService->getFrom(), $this->fromAs ? $this->fromAs : '');
             }
 
             $message->to($emailService->getTo(), $this->sendAs ? $this->sendAs : '');
