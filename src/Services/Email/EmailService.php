@@ -78,11 +78,13 @@ class EmailService
     public function sendAs($name)
     {
         $this->sendAs = $name;
+        return $this;
     }
 
     public function fromAs($name)
     {
         $this->fromAs = $name;
+        return $this;
     }
 
     /**
