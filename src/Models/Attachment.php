@@ -80,6 +80,7 @@ class Attachment extends \Eloquent
     public function selfDestruct($physicalDelete = false)
     {
         if ($physicalDelete) {
+            $this->media->deleteFromDisk();
             $this->media->selfDestruct();
         }
         /*foreach($this->sizes as $size){
