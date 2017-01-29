@@ -9,6 +9,7 @@
 namespace Optimait\Laravel\Models;
 
 
+use Optimait\Laravel\Services\Image\ImageManipulator;
 use Optimait\Laravel\Traits\CreatedUpdatedTrait;
 use Optimait\Laravel\Traits\CreaterUpdaterTrait;
 
@@ -76,11 +77,18 @@ class Attachment extends \Eloquent
         return @substr($this->media->mime_type, 0, 5) == 'image';
     }
 
+    public function resize(ImageManipulator $manipulator){
+
+        if(\File::exists($this->media->folder . $this->media->filename)){
+            $this->media->deleteFromDisk();
+            $manipulator->resize($this->media->filename, $this->media->folder);
+        }
+    }
 
     public function selfDestruct($physicalDelete = false)
     {
         if ($physicalDelete) {
-            $this->media->deleteFromDisk();
+            $this->media->deleteFromDisk(true);
             $this->media->selfDestruct();
         }
         /*foreach($this->sizes as $size){

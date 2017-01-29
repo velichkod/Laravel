@@ -33,13 +33,16 @@ class Media extends \Eloquent
         return $this->belongsTo('App\User', 'created_by');
     }
 
-    public function deleteFromDisk(){
+    public function deleteFromDisk($original = false){
         $sizes = array_values(config('resize.sizes'));
         foreach($sizes as $size){
             @unlink($this->folder .$size[0].'X'.$size[1]. $this->filename);
         }
 
-        @unlink($this->folder. $this->filename);
+        if($original){
+            @unlink($this->folder. $this->filename);
+        }
+
     }
 
     public function selfDestruct()
