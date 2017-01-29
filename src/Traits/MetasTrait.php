@@ -19,7 +19,6 @@ trait MetasTrait
         if (is_null($this->metasContainer)) {
             if ($this->metas):
                 foreach ($this->metas as $meta) {
-
                     $unserialized = unserialize($meta->meta_value);
                     if ($unserialized !== false) {
                         $this->metasContainer[$meta->meta_key] = $unserialized;
