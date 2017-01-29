@@ -20,6 +20,8 @@ class EmailService
     private $cc;
     private $bcc;
     private $subject;
+    private $sendAs;
+    private $fromAs;
 
     /**
      * @return mixed
@@ -70,6 +72,18 @@ class EmailService
     public function setBcc($bcc)
     {
         $this->bcc = $bcc;
+        return $this;
+    }
+
+    public function sendAs($name)
+    {
+        $this->sendAs = $name;
+        return $this;
+    }
+
+    public function fromAs($name)
+    {
+        $this->fromAs = $name;
         return $this;
     }
 
@@ -133,10 +147,19 @@ class EmailService
         $emailService = $this;
         Mail::send($view, $data, function ($message) use ($emailService) {
             if (!is_null($emailService->getFrom())) {
-                $message->from($emailService->getFrom());
+                if (!is_null($this->fromAs)) {
+                    $message->from($emailService->getFrom(), $this->fromAs);
+                } else {
+                    $message->from($emailService->getFrom(), $this->fromAs);
+                }
             }
 
-            $message->to($emailService->getTo());
+            if (!is_null($this->sendAs)) {
+                $message->to($emailService->getTo(), $this->sendAs);
+            } else {
+                $message->to($emailService->getTo());
+            }
+
             $message->subject($emailService->getSubject());
 
             $bcc = $emailService->getBcc();
@@ -148,7 +171,7 @@ class EmailService
             $cc = $emailService->getCc();
             if (!empty($cc)) {
                 foreach ($cc as $b) {
-                    $message->bcc($b);
+                    $message->cc($b);
                 }
             }
             $attachments = $emailService->getAttachments();
@@ -159,4 +182,4 @@ class EmailService
             }
         });
     }
-} 
+}
