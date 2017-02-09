@@ -12,7 +12,6 @@ class ImageManipulator
     {
 
         $sizes = array_values(config('resize.sizes'));
-
         foreach ($sizes as $size) {
             $img = Image::make($uploadFolder . $filename);
             if (isset($size[2])) {
