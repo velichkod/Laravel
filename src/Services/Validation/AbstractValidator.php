@@ -24,6 +24,7 @@ abstract class AbstractValidator {
      */
     protected $rules = array();
 
+    protected $messages = [];
 
     protected $defaultRule = 'default';
     /**
@@ -80,5 +81,10 @@ abstract class AbstractValidator {
 
     public function when($newDefault){
         return $this->setDefault($newDefault);
+    }
+
+    public function setMessages($ar){
+        $this->messages = $ar;
+        return $this;
     }
 } 

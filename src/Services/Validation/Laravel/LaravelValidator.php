@@ -29,7 +29,7 @@ class LaravelValidator extends AbstractValidator {
      */
     function isValid($throwException = true)
     {
-        $validator = $this->validator->make($this->data, $this->rules[$this->defaultRule], []);
+        $validator = $this->validator->make($this->data, $this->rules[$this->defaultRule], $this->messages);
 
         if( $validator->fails() )
         {
