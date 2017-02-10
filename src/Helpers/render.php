@@ -1,7 +1,12 @@
 <?php
-function btn($title = 'Save', $class = 'btn-primary')
+function btn($title = 'Save', $class = 'btn-primary', $button = false)
 {
-    return '<input type="submit" value="' . $title . '" class="btn ' . $class . ' submit-btn">';
+    if(!$button){
+        return '<input type="submit" value="' . $title . '" class="btn ' . $class . ' submit-btn">';
+    }
+    else{
+        return '<button type="submit" value="' . $title . '" class="btn ' . $class . ' submit-btn">' .$button. '</button>';
+    }
 }
 
 
