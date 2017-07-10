@@ -150,7 +150,7 @@ class EmailService
                 if (!is_null($this->fromAs)) {
                     $message->from($emailService->getFrom(), $this->fromAs);
                 } else {
-                    $message->from($emailService->getFrom(), $this->fromAs);
+                    $message->from($emailService->getFrom());
                 }
             }
 
