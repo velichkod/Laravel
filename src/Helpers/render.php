@@ -1,8 +1,4 @@
 <?php
-function method_field($method='put'){
-    return '<input type="hidden" name="_method" value="'.$method.'">';
-}
-
 function OptionsView($collection, $idKey, $valKey, $default = '', $skip = array())
 {
     $str = '';
