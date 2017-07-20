@@ -130,25 +130,6 @@ abstract class EloquentRepository
         return $this->storeEloquentModel($model);
     }
 
-
-    public function simpleUpdate($id, $data)
-    {
-
-        $model = $this->getById($id);
-
-        $model->fill($data);
-
-        if ($model->save()) {
-
-            return $model;
-        }
-
-        /*$leadModel->update($leadData);*/
-
-        return false;
-
-    }
-
     public function startTransaction()
     {
         \Illuminate\Support\Facades\DB::beginTransaction();
@@ -162,5 +143,27 @@ abstract class EloquentRepository
     public function rollbackTransaction()
     {
         \Illuminate\Support\Facades\DB::rollBack();
+    }
+
+    public function findOneBy($filter=[], $callback = null){
+        $q = $this->model;
+        foreach($filter as $k => $v){
+            $q->where($k, $v);
+        }
+        if(!is_null($callback) && is_callable($callback)){
+            $callback($q);
+        }
+        return $q->first();
+    }
+
+    public function findBy($filter=[], $callback = null){
+        $q = $this->model;
+        foreach($filter as $k => $v){
+            $q->where($k, $v);
+        }
+        if(!is_null($callback) && is_callable($callback)){
+            $callback($q);
+        }
+        return $q->get();
     }
 }
