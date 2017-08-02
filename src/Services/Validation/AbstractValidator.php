@@ -1,8 +1,10 @@
 <?php
+
 namespace Optimait\Laravel\Services\Validation;
 
 
-abstract class AbstractValidator {
+abstract class AbstractValidator
+{
     /**
      * Validator
      *
@@ -59,7 +61,6 @@ abstract class AbstractValidator {
     }
 
 
-
     /**
      * Pass the data and the rules to the validator
      *
@@ -70,20 +71,29 @@ abstract class AbstractValidator {
     /**
      * @param array $newRules set of new validation rules for the current model
      */
-    public function setDefault($newDefault){
+    public function setDefault($newDefault)
+    {
         $this->defaultRule = $newDefault;
         return $this;
     }
 
-    public function forContext($newDetault){
+    public function forRequest($rule)
+    {
+        return $this->setDefault($rule);
+    }
+
+    public function forContext($newDetault)
+    {
         return $this->setDefault($newDetault);
     }
 
-    public function when($newDefault){
+    public function when($newDefault)
+    {
         return $this->setDefault($newDefault);
     }
 
-    public function setMessages($ar){
+    public function setMessages($ar)
+    {
         $this->messages = $ar;
         return $this;
     }

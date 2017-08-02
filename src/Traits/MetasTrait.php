@@ -11,7 +11,6 @@ namespace Optimait\Laravel\Traits;
 
 trait MetasTrait
 {
-
     private $metasContainer = null;
 
     public function getMeta($key)
@@ -19,19 +18,21 @@ trait MetasTrait
         if (is_null($this->metasContainer)) {
             if ($this->metas):
                 foreach ($this->metas as $meta) {
-                    $unserialized = unserialize($meta->meta_value);
+                    $unserialized = @unserialize($meta->meta_value);
                     if ($unserialized !== false) {
                         $this->metasContainer[$meta->meta_key] = $unserialized;
                     } else {
                         $this->metasContainer[$meta->meta_key] = $meta->meta_value;
                     }
-
-                    $this->metasContainer[$meta->meta_key] = $meta->meta_value;
                 }
             endif;
         }
         if (isset($this->metasContainer[$key])) {
             return $this->metasContainer[$key];
+        }
+
+        if ($key == 'all') {
+            return $this->metasContainer;
         }
 
         return null;
