@@ -72,14 +72,26 @@ class Attachment extends \Eloquent
         return asset($this->media->folder . $size[0] . 'X' . $size[1] . $this->media->filename);
     }
 
+
+    public function getPath($thumb = null)
+    {
+        if (!is_null($thumb)) {
+            $size = config('resize.sizes.' . $thumb);
+            return public_path($this->media->folder . $size[0] . 'X' . $size[1] . $this->media->filename);
+        }
+
+        return public_path($this->media->folder . $this->media->filename);
+    }
+
     public function isImage()
     {
         return @substr($this->media->mime_type, 0, 5) == 'image';
     }
 
-    public function resize(ImageManipulator $manipulator){
+    public function resize(ImageManipulator $manipulator)
+    {
 
-        if(\File::exists($this->media->folder . $this->media->filename)){
+        if (\File::exists($this->media->folder . $this->media->filename)) {
             $this->media->deleteFromDisk();
             $manipulator->resize($this->media->filename, $this->media->folder);
         }
