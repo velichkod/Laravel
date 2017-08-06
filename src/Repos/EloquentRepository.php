@@ -10,6 +10,7 @@ namespace Optimait\Laravel\Repos;
 
 
 use Illuminate\Database\Eloquent\Model;
+use Optimait\Laravel\Exceptions\ApplicationException;
 use Optimait\Laravel\Exceptions\EntityNotFoundException;
 
 abstract class EloquentRepository
@@ -165,5 +166,19 @@ abstract class EloquentRepository
             $callback($q);
         }
         return $q->get();
+    }
+
+
+    public function checkDuplicates($filter=[], $id = [])
+    {
+        $q = $this->model;
+        foreach($filter as $k => $v){
+            $q->where($k, $v);
+        }
+        //echo $email;
+        if ($q->whereNotIn('id', $id)->count()) {
+            throw new ApplicationException('Option already exists');
+        }
+        //print_r(\DB::getQueryLog());
     }
 }
