@@ -14,7 +14,11 @@ use Optimait\Laravel\Exceptions\ApplicationException;
 use Optimait\Laravel\Exceptions\EntityNotFoundException;
 use Optimait\Laravel\Repos\Contracts\BaseRepositoryInterface;
 
-
+/**
+ * Class EloquentRepository
+ * @package Optimait\Laravel\Repos\Eloquent
+ * @author Rajendra Sharma <drudge.rajan@gmail.com>
+ */
 class EloquentRepository extends AbstractEloquentRepository implements BaseRepositoryInterface
 {
     protected $model;
@@ -183,4 +187,31 @@ class EloquentRepository extends AbstractEloquentRepository implements BaseRepos
         }
         //print_r(\DB::getQueryLog());
     }
+
+    /**
+     * Get Data With Relation Model By Id
+     *
+     * @param $with - related model
+     * @param $id
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function getDataWithRelationModelById(array $with, $id = null)
+    {
+        if ($id) {
+            return $this->model->with($with)->where('id', $id)->first();
+        }
+
+        return $this->model->with($with)->get();
+    }
+
+    /**
+     * @param array $where
+     * @param array $with
+     * @return mixed
+     */
+    public function getAllByWhereAndRelationModel(array $where, array $with)
+    {
+        return $this->model->where($where)->with($with)->get();
+    }
+
 }

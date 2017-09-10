@@ -8,7 +8,11 @@
 
 namespace Optimait\Laravel\Repos\Eloquent;
 
-
+/**
+ * Class AbstractEloquentRepository
+ * @package Optimait\Laravel\Repos\Eloquent
+ * @author Rajendra Sharma <drudge.rajan@gmail.com>
+ */
 abstract class AbstractEloquentRepository
 {
 
@@ -30,6 +34,8 @@ abstract class AbstractEloquentRepository
     abstract public function findOneBy($filter=[], $callback = null);
     abstract public function findBy($filter=[], $callback = null);
     abstract public function checkDuplicates($filter=[], $id = []);
+    abstract public function getDataWithRelationModelById(array $with, $id = null);
+    abstract public function getAllByWhereAndRelationModel(array $where, array $with);
 
 
 }
