@@ -6,14 +6,16 @@
  * Time: 1:11 PM
  */
 
-namespace Optimait\Laravel\Repos;
+namespace Optimait\Laravel\Repos\Eloquent;
 
 
 use Illuminate\Database\Eloquent\Model;
 use Optimait\Laravel\Exceptions\ApplicationException;
 use Optimait\Laravel\Exceptions\EntityNotFoundException;
+use Optimait\Laravel\Repos\Contracts\BaseRepositoryInterface;
 
-abstract class EloquentRepository
+
+class EloquentRepository extends AbstractEloquentRepository implements BaseRepositoryInterface
 {
     protected $model;
 
@@ -22,7 +24,7 @@ abstract class EloquentRepository
     protected $attrToSave;
 
     /**
-     * @param mixed $attrToSave
+     * @param $attrToSave
      */
     public function setAttrToSave($attrToSave)
     {
@@ -116,7 +118,7 @@ abstract class EloquentRepository
         return $model->delete();
     }
 
-    protected function storeEloquentModel($model)
+    public function storeEloquentModel($model)
     {
         if ($model->getDirty()) {
             return $model->save();
@@ -125,7 +127,7 @@ abstract class EloquentRepository
         }
     }
 
-    protected function storeArray($data)
+    public function storeArray($data)
     {
         $model = $this->getNew($data);
         return $this->storeEloquentModel($model);
