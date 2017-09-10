@@ -6,7 +6,7 @@
  * Time: 1:11 PM
  */
 
-namespace Optimait\Laravel\Repos\Eloquent;
+namespace Optimait\Laravel\Repos;
 
 
 use Illuminate\Database\Eloquent\Model;
