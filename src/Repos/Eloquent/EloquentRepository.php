@@ -6,14 +6,20 @@
  * Time: 1:11 PM
  */
 
-namespace Optimait\Laravel\Repos;
+namespace Optimait\Laravel\Repos\Eloquent;
 
 
 use Illuminate\Database\Eloquent\Model;
 use Optimait\Laravel\Exceptions\ApplicationException;
 use Optimait\Laravel\Exceptions\EntityNotFoundException;
+use Optimait\Laravel\Repos\Contracts\BaseRepositoryInterface;
 
-abstract class EloquentRepository
+/**
+ * Class EloquentRepository
+ * @package Optimait\Laravel\Repos\Eloquent
+ * @author Rajendra Sharma <drudge.rajan@gmail.com>
+ */
+class EloquentRepository extends AbstractEloquentRepository implements BaseRepositoryInterface
 {
     protected $model;
 
@@ -22,7 +28,7 @@ abstract class EloquentRepository
     protected $attrToSave;
 
     /**
-     * @param mixed $attrToSave
+     * @param $attrToSave
      */
     public function setAttrToSave($attrToSave)
     {
@@ -116,7 +122,7 @@ abstract class EloquentRepository
         return $model->delete();
     }
 
-    protected function storeEloquentModel($model)
+    public function storeEloquentModel($model)
     {
         if ($model->getDirty()) {
             return $model->save();
@@ -125,7 +131,7 @@ abstract class EloquentRepository
         }
     }
 
-    protected function storeArray($data)
+    public function storeArray($data)
     {
         $model = $this->getNew($data);
         return $this->storeEloquentModel($model);
@@ -181,4 +187,31 @@ abstract class EloquentRepository
         }
         //print_r(\DB::getQueryLog());
     }
+
+    /**
+     * Get Data With Relation Model By Id
+     *
+     * @param $with - related model
+     * @param $id
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function getDataWithRelationModelById(array $with, $id = null)
+    {
+        if ($id) {
+            return $this->model->with($with)->where('id', $id)->first();
+        }
+
+        return $this->model->with($with)->get();
+    }
+
+    /**
+     * @param array $where
+     * @param array $with
+     * @return mixed
+     */
+    public function getAllByWhereAndRelationModel(array $where, array $with)
+    {
+        return $this->model->where($where)->with($with)->get();
+    }
+
 }
