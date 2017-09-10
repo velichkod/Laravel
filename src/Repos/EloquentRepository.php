@@ -19,7 +19,7 @@ use Optimait\Laravel\Repos\Contracts\BaseRepositoryInterface;
  * @package Optimait\Laravel\Repos\Eloquent
  * @author Rajendra Sharma <drudge.rajan@gmail.com>
  */
-class EloquentRepository extends AbstractEloquentRepository implements BaseRepositoryInterface
+abstract class EloquentRepository implements BaseRepositoryInterface
 {
     protected $model;
 
