@@ -12,7 +12,9 @@ namespace Optimait\Laravel\Controllers;
 use Illuminate\Routing\Controller;
 use Input;
 use Optimait\Laravel\Exceptions\EntityNotFoundException;
+
 use Optimait\Laravel\Repos\AttachmentRepository;
+
 
 class AttachmentsController extends Controller {
     private $attachments;

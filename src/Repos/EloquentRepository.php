@@ -12,8 +12,9 @@ namespace Optimait\Laravel\Repos;
 use Illuminate\Database\Eloquent\Model;
 use Optimait\Laravel\Exceptions\ApplicationException;
 use Optimait\Laravel\Exceptions\EntityNotFoundException;
+use Optimait\Laravel\Repos\Contracts\BaseRepositoryInterface;
 
-abstract class EloquentRepository
+abstract class EloquentRepository implements BaseRepositoryInterface
 {
     protected $model;
 
@@ -116,7 +117,7 @@ abstract class EloquentRepository
         return $model->delete();
     }
 
-    protected function storeEloquentModel($model)
+    public function storeEloquentModel($model)
     {
         if ($model->getDirty()) {
             return $model->save();
@@ -125,7 +126,7 @@ abstract class EloquentRepository
         }
     }
 
-    protected function storeArray($data)
+    public function storeArray($data)
     {
         $model = $this->getNew($data);
         return $this->storeEloquentModel($model);
