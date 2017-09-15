@@ -1,10 +1,12 @@
 <?php
+
 namespace Optimait\Laravel\Services\PdfExport;
 
 
 use App;
 
-class PdfExportService {
+class PdfExportService
+{
     private $exporter;
     private $exportedFileName = null;
     private $exportPath = './uploads/attachments/';
@@ -18,6 +20,11 @@ class PdfExportService {
         return $this->isStream;
     }
 
+    public function getExporter()
+    {
+        return $this->exporter;
+    }
+
     /**
      * @param boolean $isStream
      */
@@ -28,22 +35,25 @@ class PdfExportService {
     }
 
 
-
-    public function __construct(){
-        $this->exporter  = App::make('dompdf.wrapper');
+    public function __construct()
+    {
+        $this->exporter = App::make('dompdf.wrapper');
     }
 
-    public function setName($name){
+    public function setName($name)
+    {
         $this->exportedFileName = $name;
         return $this;
     }
 
-    public function getExportedFileName(){
+    public function getExportedFileName()
+    {
         return $this->exportedFileName;
     }
 
-    public function getExportedFullPath(){
-        return $this->exportPath.$this->exportedFileName;
+    public function getExportedFullPath()
+    {
+        return $this->exportPath . $this->exportedFileName;
     }
 
     /**
@@ -57,7 +67,7 @@ class PdfExportService {
     /**
      * @param mixed $exportPath
      */
-    
+
     public function setExportPath($exportPath)
     {
         $this->exportPath = $exportPath;
@@ -65,35 +75,40 @@ class PdfExportService {
     }
 
 
-    public function remove(){
+    public function remove()
+    {
         return @unlink($this->getExportedFullPath());
     }
 
-    public function load($content){
+    public function load($content)
+    {
         $this->exporter->loadHTML($content);
         return $this;
     }
 
 
-    public function save(\Closure $c = null){
-        if(!is_null($c)){
+    public function save(\Closure $c = null)
+    {
+        if (!is_null($c)) {
             $c($this);
         }
 
-        if(is_null($this->exportedFileName)){
-            $this->exportedFileName = 'Reports_'.time().'.pdf';
+        if (is_null($this->exportedFileName)) {
+            $this->exportedFileName = 'Reports_' . time() . '.pdf';
         }
-        @$this->exporter->setWarnings(false)->save($this->exportPath.$this->exportedFileName);
+        @$this->exporter->setWarnings(false)->save($this->exportPath . $this->exportedFileName);
 
 
         return true;
     }
 
-    public function stream(){
+    public function stream()
+    {
         return $this->exporter->download($this->exportedFileName);
     }
 
-    public function download(){
+    public function download()
+    {
         return $this->exporter->download($this->exportedFileName);
     }
 
