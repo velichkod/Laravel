@@ -1,13 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Zorro
- * Date: 5/30/2016
- * Time: 1:11 PM
- */
-
 namespace Optimait\Laravel\Repos;
-
 
 use Illuminate\Database\Eloquent\Model;
 use Optimait\Laravel\Exceptions\ApplicationException;
@@ -17,9 +9,7 @@ use Optimait\Laravel\Repos\Contracts\BaseRepositoryInterface;
 abstract class EloquentRepository implements BaseRepositoryInterface
 {
     protected $model;
-
     protected $attrToValidate;
-
     protected $attrToSave;
 
     /**
@@ -148,7 +138,7 @@ abstract class EloquentRepository implements BaseRepositoryInterface
     }
 
     public function findOneBy($filter=[], $callback = null){
-        $q = $this->model;
+        $q = $this->model->whereRaw("1 = 1");
         foreach($filter as $k => $v){
             $q->where($k, $v);
         }
@@ -159,7 +149,7 @@ abstract class EloquentRepository implements BaseRepositoryInterface
     }
 
     public function findBy($filter=[], $callback = null){
-        $q = $this->model;
+        $q = $this->model->whereRaw("1 = 1");
         foreach($filter as $k => $v){
             $q->where($k, $v);
         }
@@ -172,13 +162,13 @@ abstract class EloquentRepository implements BaseRepositoryInterface
 
     public function checkDuplicates($filter=[], $id = [])
     {
-        $q = $this->model;
+        $q = $this->model->whereRaw("1 = 1");
         foreach($filter as $k => $v){
             $q->where($k, $v);
         }
         //echo $email;
         if ($q->whereNotIn('id', $id)->count()) {
-            throw new ApplicationException('Option already exists');
+            throw new ApplicationException('Duplicate Found');
         }
         //print_r(\DB::getQueryLog());
     }

@@ -1,18 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: drudge
- * Date: 9/10/17
- * Time: 11:43 AM
- */
-
 namespace Optimait\Laravel\Repos\Contracts;
 
-/**
- * Interface BaseRepositoryInterface
- * @package Optimait\Laravel
- * @author Rajendra Sharma <drudge.rajan@gmail.com>
- */
 interface BaseRepositoryInterface
 {
     /**
