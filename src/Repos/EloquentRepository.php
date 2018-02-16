@@ -82,7 +82,7 @@ abstract class EloquentRepository implements BaseRepositoryInterface
         $model = $this->getById($id);
 
         if (!$model) {
-            throw new EntityNotFoundException;
+            throw new EntityNotFoundException("Entity Not Found");
         }
 
         return $model;

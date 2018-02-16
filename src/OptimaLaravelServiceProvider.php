@@ -43,7 +43,7 @@ class OptimaLaravelServiceProvider extends ServiceProvider
 
     private function handleConfigs() {
         $this->publishes([
-            __DIR__.'/../config/resize.php' => config_path('resize.php'),
+            __DIR__.'/../config/resize.php' => 'config/resize.php',
         ]);
     }
 
