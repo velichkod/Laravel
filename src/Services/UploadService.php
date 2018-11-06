@@ -43,7 +43,7 @@ class UploadService {
                 $this->uploadedName = '_'.time().str_random(15).'.'.$this->handler->getClientOriginalExtension();
             }
             $this->fileSize = $this->handler->getClientSize();
-            return $this->handler->move($this->uploadPath, $this->uploadedName);
+            return copy($this->handler->getPathname(), $this->getFullPath());
         }
     }
 
