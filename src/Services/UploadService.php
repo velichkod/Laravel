@@ -43,6 +43,9 @@ class UploadService {
                 $this->uploadedName = '_'.time().str_random(15).'.'.$this->handler->getClientOriginalExtension();
             }
             $this->fileSize = $this->handler->getClientSize();
+            if (!\File::isDirectory($this->uploadPath)) {
+                \File::makeDirectory($this->uploadPath);
+            }
             return copy($this->handler->getPathname(), $this->getFullPath());
         }
     }
