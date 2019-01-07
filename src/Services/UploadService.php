@@ -44,7 +44,7 @@ class UploadService {
             }
             $this->fileSize = $this->handler->getClientSize();
             if (!\File::isDirectory($this->uploadPath)) {
-                \File::makeDirectory($this->uploadPath);
+                \File::makeDirectory($this->uploadPath, 0777, true, true);
             }
             return copy($this->handler->getPathname(), $this->getFullPath());
         }
