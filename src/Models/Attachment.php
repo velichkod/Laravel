@@ -66,18 +66,23 @@ class Attachment extends \Eloquent
         return asset($this->media->folder . $this->media->filename);
     }
 
+    public function getFileUrl()
+    {
+        return asset($this->media->folder . $this->media->filename);
+    }
+
     public function getThumbUrl($thumb = 'thumb')
     {
-        $size = config('resize.sizes.' . $thumb);
-        return asset($this->media->folder . $size[0] . 'X' . $size[1] . $this->media->filename);
+        //$size = config('resize.sizes.' . $thumb);
+        return asset($this->media->folder . $thumb . $this->media->filename);
     }
 
 
     public function getPath($thumb = null)
     {
         if (!is_null($thumb)) {
-            $size = config('resize.sizes.' . $thumb);
-            return public_path($this->media->folder . $size[0] . 'X' . $size[1] . $this->media->filename);
+            //$size = config('resize.sizes.' . $thumb);
+            return public_path($this->media->folder . $thumb . $this->media->filename);
         }
 
         return public_path($this->media->folder . $this->media->filename);
