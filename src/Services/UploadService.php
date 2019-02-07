@@ -60,7 +60,7 @@ class UploadService {
     }
 
     public function getFullPath(){
-        return $this->uploadPath.'/'.$this->uploadedName;
+        return rtrim($this->uploadPath, '/').'/'.$this->uploadedName;
     }
 
     public function getFileSize(){

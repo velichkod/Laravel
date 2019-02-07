@@ -14,11 +14,11 @@ class CreateMediaTable extends Migration
     {
         Schema::create('media', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('filename');
-            $table->string('original_name');
-            $table->string('mime_type', 50);
-            $table->string('filesize', 20);
-            $table->string('folder', 50);
+            $table->string('filename')->nullable();
+            $table->string('original_name')->nullable();
+            $table->string('mime_type', 50)->nullable();
+            $table->string('filesize', 20)->nullable();
+            $table->string('folder', 50)->nullable();
             $table->timestamps();
         });
     }

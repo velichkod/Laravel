@@ -1,7 +1,8 @@
 <?php
+
 namespace Optimait\Laravel\Services\Image;
 
-use \Image;
+use Image;
 
 
 class ImageManipulator
@@ -11,8 +12,8 @@ class ImageManipulator
     public function resize($filename, $uploadFolder)
     {
 
-        $sizes = array_values(config('resize.sizes'));
-        foreach ($sizes as $size) {
+        $sizes = config('resize.sizes');
+        foreach ($sizes as $thumb => $size) {
             $img = Image::make($uploadFolder . $filename);
             if (isset($size[2])) {
                 switch ($size[2]) {
@@ -39,7 +40,7 @@ class ImageManipulator
                 $img->resize($size[0], $size[1]);
             }
 
-            $img->save($uploadFolder . $size[0] . 'X' . $size[1] . $filename);
+            $img->save($uploadFolder . $thumb . $filename);
         }
 
     }
